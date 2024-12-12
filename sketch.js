@@ -653,9 +653,16 @@ function genNext() {
     increaseGradientPos()
     gradient = gradients[gradientPos];
     decidePositions()
-    artistName = randomCapitalize(artistName)
-    venue = randomCapitalize(venue)
-    city = randomCapitalize(city)
+    artistName = randomCapitalize(artistInput.value())
+    venue = randomCapitalize(venueInput.value())
+    city = randomCapitalize(cityInput.value())
+    date = dateInput.value()
+    time = timeInput.value()  
+    duration = durationInput.value() == "" ? 600 : int(durationInput.value())*60
+    jumpValue = jumpInput.value() == "" ? 0 : jumpInput.value()
+    lengthRay = sizeInput.value() == "" ? 3 : sizeInput.value()
+
+
   }
   
 }
