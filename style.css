@@ -1,9 +1,11 @@
-html, body {
+body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(270deg, rgb(255, 255, 255) 25%, rgb(115, 141, 158) 100%);
-    background-attachment: fixed; /*edit*/
+  background-color: rgb(187, 187, 187);
+  background-attachment: fixed; 
 }
+
+
 
 canvas {
   display: block;

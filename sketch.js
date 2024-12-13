@@ -241,7 +241,7 @@ function styleButtonInput(b, xpos, ypos) {
   // Style the button
   b.style('font-size', '200px');
   b.style('padding', '50px 50px'); // Standard Material button padding
-  b.style('background-color', '#244b8c'); // Material primary color
+  b.style('background-color', 'grey'); // Material primary color
   b.style('color', '#ffffff'); // Text color
   b.style('font-family', 'Roboto, sans-serif'); // Material font
   b.style('border', 'none'); // No border
@@ -252,13 +252,13 @@ function styleButtonInput(b, xpos, ypos) {
 
   // Hover effect
   b.mouseOver(() => {
-    b.style('background-color', '#112342'); // Darker shade on hover
+    b.style('background-color', 'lightgrey'); // Darker shade on hover
     b.style('box-shadow', '0px 4px 8px rgba(0, 0, 0, 0.3)'); // Deeper shadow on hover
   });
 
   // Reset hover effect
   b.mouseOut(() => {
-    b.style('background-color', '#244b8c'); // Original color
+    b.style('background-color', 'grey'); // Original color
     b.style('box-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)'); // Original shadow
   });
 
@@ -270,6 +270,7 @@ function styleButtonInput(b, xpos, ypos) {
 }
 
 function restartGeneration() {
+  
   if (!fftDone) {
     if (sound.isPlaying()) {
       sound.pause();
@@ -295,6 +296,7 @@ function restartGeneration() {
   setup()
   nextButton.style('display', 'none');
   button.style('display', 'block');
+  sendGray()
 
   artistInput.value(artistName.toLowerCase())
   venueInput.value(venue.toLowerCase())
@@ -368,6 +370,7 @@ function imgOnLoad(mimg) {
     applyGradientMap();
 
     applyGrainEffect(200);
+    sendColorToPage(gradient[gradient.length-1].color);
 
     noLoop();
   };
@@ -637,6 +640,7 @@ function genPos() {
       
       sound.pause();
       noLoop();
+
     } else {
       sound.loop();
       sound.jump(int(jumpValue))
@@ -661,10 +665,20 @@ function genNext() {
     duration = durationInput.value() == "" ? 600 : int(durationInput.value())*60
     jumpValue = jumpInput.value() == "" ? 0 : jumpInput.value()
     lengthRay = sizeInput.value() == "" ? 3 : sizeInput.value()
-
+    sendColorToPage(gradient[gradient.length-1].color);
 
   }
   
+}
+
+function sendColorToPage(col) {
+  const colorString = `rgb(${col[0]}, ${col[1]}, ${col[2]})`;
+  // Dispatch the color to the main document
+  window.parent.postMessage({ type: 'updateColor', color: colorString }, '*');
+}
+
+function sendGray(col) {
+  window.parent.postMessage({ type: 'updateColor', color: 'lightgrey' }, '*');
 }
 
 function increaseGradientPos() {

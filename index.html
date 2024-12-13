@@ -12,7 +12,19 @@
     <script src="libraries/p5.sound.min.js"></script>
   </head>
 
-  <body>
+  <body id = "body">
     <script src="sketch.js"></script>
+    <script>
+      // Listen for messages from the p5.js sketch
+      window.addEventListener('message', (event) => {
+          if (event.data && event.data.type === 'updateColor') {
+              const dynamicColor = event.data.color; // Color from p5.js (e.g., "rgb(255, 0, 0)")
+              print(`linear-gradient(270deg, ${dynamicColor} 25%, rgb(115, 141, 158) 100%)`)
+              print(document.getElementById("body").style.background)
+              // Update the gradient with the new color
+              document.body.style.backgroundColor = dynamicColor
+          }
+      });
+  </script>
   </body>
 </html>
