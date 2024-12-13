@@ -122,6 +122,7 @@ let gradients = [
 let button, nextButton, inputSound, inputPhoto, buttonReset, saveButton
 let artistInput, dateInput, timeInput, venueInput, cityInput, durationInput, jumpInput
 let songLabel, photoLabel, jumpValue, sizeValue, sizeInput, headline, photoFileName, soundFileName
+let photoLabelWrapper, songlabelWrapper
 
 function preload() {
   font = loadFont('dl.otf');
@@ -132,11 +133,11 @@ function preload() {
 function setup() {
 
   canvas = createCanvas(2480, 3508);
-  inputPos = windowWidth/2+1500
-  canvas.position(windowWidth/2-1240,25)
-  canvas.style('border', '4px solid black');
+  inputPos = windowWidth/2-1250
+  canvas.position(windowWidth/2+350,25)
+  // canvas.style('border', '16px solid white');
   canvas.style('border-radius', '10px'); // Optional for rounded corners
-  canvas.style('box-shadow', '0 4px 10px rgba(0, 0, 0, 0.5)'); 
+  canvas.style('box-shadow', '0 0 1000px rgba(0, 0, 0, 0.3)'); 
   angleMode(DEGREES)
   fft = new p5.FFT(0.8, 256);
   gradient = gradients[gradientPos];
@@ -153,79 +154,95 @@ function setup() {
   decidePositions()
 
   button = createButton('Generate');
-  styleButtonInput(button, 100, 1100);
+  styleButtonInput(button, 500, 1100);
   button.mousePressed(genPos);
 
   nextButton = createButton('Next');
-  styleButtonInput(nextButton, 100, 1100);
+  styleButtonInput(nextButton, 500, 1100);
   nextButton.mousePressed(genNext);
   nextButton.style('display', 'none');
 
-  headline = createElement('h1', 'Harmoniq')
-  headline.style('font-size', '400px');
+  headline = createElement('h1', 'hArmOnIq')
+  headline.style('font-size', '600px');
   headline.style('font-family', 'myFirstFont');
   headline.style('color', 'white');
-  headline.position(100, -150);
+  headline.style('border', '0px solid white')
+  headline.style('stroke', 'none')
+  headline.position(500, -350);
 
-
-  songLabel = createElement('p', 'Upload sound file');
+  
+  songLabel = createElement('p', 'No song uploaded');
   songLabel.style('font-size', '100px');
   songLabel.style('font-family', 'Arial');
-  songLabel.position(inputPos, 200);
+  songLabel.position(500, 3250);
+
+  songlabelWrapper = createElement('label', 'Upload song');
+  songlabelWrapper.attribute('for', 'soundup');
+  styleButtonInput(songlabelWrapper, 500, 2850);
+
   inputSound = createFileInput(handleSound);
-  inputSound.position(inputPos, 400);
+  inputSound.position(500, 450);
   inputSound.style('font-size', '100px'); 
   inputSound.style('margin-top', '105px');
   inputSound.style('margin-top', '50px');
   inputSound.style('color', 'rgba(0,0,0,0)')
+  inputSound.id('soundup')
+  inputSound.style('display', 'none');
 
-  photoLabel = createElement('p', 'Upload photo file');
+
+  photoLabel = createElement('p', 'No photo uploaded');
   photoLabel.style('font-size', '100px');
   photoLabel.style('font-family', 'Arial');
-  photoLabel.position(inputPos, 500);
+  photoLabel.position(500, 3120);
+
+  photoLabelWrapper = createElement('label', 'Upload photo');
+  photoLabelWrapper.attribute('for', 'photoup');
+  styleButtonInput(photoLabelWrapper, 500, 2500);
+
   inputPhoto = createFileInput(handleImage);
-  inputPhoto.position(inputPos, 700);
+  inputPhoto.position(500, 700);
   inputPhoto.style('font-size', '100px'); 
   inputPhoto.style('margin-top', '105px');
   inputPhoto.style('margin-top', '50px');
   inputPhoto.style('color', 'rgba(0,0,0,0)')
-
+  inputPhoto.style('display', 'none');
+  inputPhoto.id('photoup')
   setupTextInputs()
   
   saveButton = createButton('Save');
-  styleButtonInput(saveButton, 100, 1500);
+  styleButtonInput(saveButton, 500, 1450);
   saveButton.mousePressed(saveAction);
 
   buttonReset = createButton('Reset generation');
-  styleButtonInput(buttonReset, 100, 1900);
+  styleButtonInput(buttonReset, 500, 1800);
   buttonReset.mousePressed(restartGeneration);
   
 }
 
 function setupTextInputs() {
   artistInput = createInput();
-  styleTextInput(artistInput, inputPos, 1000, 'Artist name', artistName)
+  styleTextInput(artistInput, inputPos, 1100, 'Artist name', artistName)
 
   venueInput = createInput();
-  styleTextInput(venueInput, inputPos, 1200, 'Venue name', venue)
+  styleTextInput(venueInput, inputPos, 1400, 'Venue name', venue)
 
   dateInput = createInput();
-  styleTextInput(dateInput, inputPos, 1400, 'Date (DD.MM.YYYY)', date)
+  styleTextInput(dateInput, inputPos, 1700, 'Date (DD.MM.YYYY)', date)
 
   timeInput = createInput();
-  styleTextInput(timeInput, inputPos, 1600, 'Time (HH:MM)', time)
+  styleTextInput(timeInput, inputPos, 2000, 'Time (HH:MM)', time)
 
   cityInput = createInput();
-  styleTextInput(cityInput, inputPos, 1800, 'City | Country', city)
+  styleTextInput(cityInput, inputPos, 2300, 'City | Country', city)
 
   durationInput = createInput();
-  styleTextInput(durationInput, inputPos, 2000, 'Duration (sec, default=10)', duration)
+  styleTextInput(durationInput, inputPos, 2600, 'Duration (sec, default=10)', duration)
 
   jumpInput = createInput();
-  styleTextInput(jumpInput, inputPos, 2200, 'Jump to (sec, default=0)', jumpValue)
+  styleTextInput(jumpInput, inputPos, 2900, 'Jump to (sec, default=0)', jumpValue)
 
   sizeInput = createInput();
-  styleTextInput(sizeInput, inputPos, 2400, 'Ray length (0-5, default=3)', sizeValue)
+  styleTextInput(sizeInput, inputPos, 3200, 'Ray length (0-5, default=3)', sizeValue)
 }
 
 function styleTextInput(input, xpos, ypos, text, value) {
@@ -233,14 +250,16 @@ function styleTextInput(input, xpos, ypos, text, value) {
   input.position(xpos, ypos);
   input.style( 'font-size', '100px');
   input.attribute('placeholder', text)
-  input.attribute('border', '2px solid #4CAF50');
+  input.style('border-radius', '50px');
+  input.style('padding', '50px 50px');
+  input.style('border', '0px solid white');
 }
 
 function styleButtonInput(b, xpos, ypos) {
   b.position(xpos, ypos);
   // Style the button
-  b.style('font-size', '200px');
-  b.style('padding', '50px 50px'); // Standard Material button padding
+  b.style('font-size', '175px');
+  b.style('padding', '50px 0px'); // Standard Material button padding
   b.style('background-color', 'grey'); // Material primary color
   b.style('color', '#ffffff'); // Text color
   b.style('font-family', 'Roboto, sans-serif'); // Material font
@@ -248,11 +267,13 @@ function styleButtonInput(b, xpos, ypos) {
   b.style('border-radius', '50px'); // Rounded corners
   b.style('box-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)'); // Material shadow
   b.style('cursor', 'pointer'); // Pointer cursor for clickable elements
-  b.style('transition', 'background-color 0.3s, box-shadow 0.3s'); // Smooth animations
+  b.style('transition', 'background-color 0.3s, box-shadow 0.3s'); // Smooth animations\
+  b.style('width', '1550px');
+  b.style('text-align', 'center');
 
   // Hover effect
   b.mouseOver(() => {
-    b.style('background-color', 'lightgrey'); // Darker shade on hover
+    b.style('background-color', 'darkgrey'); // Darker shade on hover
     b.style('box-shadow', '0px 4px 8px rgba(0, 0, 0, 0.3)'); // Deeper shadow on hover
   });
 
@@ -264,7 +285,7 @@ function styleButtonInput(b, xpos, ypos) {
 
   // Active (clicked) effect
   b.mousePressed(() => {
-    b.style('background-color', '#03dac5'); // Accent color on press
+    b.style('background-color', '#383838'); // Accent color on press
   });
 
 }
@@ -275,11 +296,7 @@ function restartGeneration() {
     if (sound.isPlaying()) {
       sound.pause();
       noLoop();
-    } else {
-      sound.loop();
-      jump(int(jumpValue))
-      loop();
-    }
+    } 
   }
   background(255, 100)
   fft = new p5.FFT(0.8, 256);
@@ -290,13 +307,14 @@ function restartGeneration() {
   startAngle = random(360)
   fftDone = false;
   count = 0;  
-  photoLabel.style('color', 'white')
-  songLabel.style('color', 'white')
+  photoLabel.style('color', 'lightgrey')
+  songLabel.style('color', 'lightgrey')
   loop();
   setup()
   nextButton.style('display', 'none');
   button.style('display', 'block');
   sendGray()
+  headline.style('color', `white`);
 
   artistInput.value(artistName.toLowerCase())
   venueInput.value(venue.toLowerCase())
@@ -313,10 +331,14 @@ function restartGeneration() {
     sizeInput.value(lengthRay)
   }
   if (soundFileName != undefined) {
-    songLabel.html(soundFileName);
+    let a = "Song: " + soundFileName
+    if (a.length > 25) a = a.substring(0, 25) + "...";
+    songLabel.html(a);
   }
   if (photoFileName != undefined) { 
-    photoLabel.html(photoFileName);
+    let a = "Photo: " + photoFileName
+    if (a.length > 25) a = a.substring(0, 25) + "...";
+    photoLabel.html(a);
   } 
   
   
@@ -325,17 +347,23 @@ function restartGeneration() {
 
 function handleSound(file) {
   if (file.type === 'audio') {
-    sound = loadSound(file.data, '');
-    songLabel.html(file.name);
     soundFileName = file.name;
+    sound = loadSound(file.data, '');
+    let a = "Song: " + soundFileName
+    if (a.length > 25) a = a.substring(0, 25) + "...";
+    songLabel.html(a);
+    
   } 
 }
 
 function handleImage(file) {
   if (file.type === 'image') {
-    photo = loadImage(file.data, '');
-    photoLabel.html(file.name);
     photoFileName = file.name;
+    photo = loadImage(file.data, '');
+    let a = "Photo: " + photoFileName
+    if (a.length > 25) a = a.substring(0, 25) + "...";
+    photoLabel.html(a);
+    
   } 
 }
 
@@ -371,9 +399,44 @@ function imgOnLoad(mimg) {
 
     applyGrainEffect(200);
     sendColorToPage(gradient[gradient.length-1].color);
-
+    let col = gradient[0].color
+    headline.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`);
+    changeButtonColors(col);
     noLoop();
   };
+}
+
+function changeButtonColors(col) {
+  nextButton.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`);
+  nextButton.mouseOut(() => {
+    nextButton.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`); // Original color
+    nextButton.style('box-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)'); // Original shadow
+  });
+
+  buttonReset.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`);
+  buttonReset.mouseOut(() => {
+    buttonReset.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`); // Original color
+    buttonReset.style('box-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)'); // Original shadow
+  });
+
+  photoLabelWrapper.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`);
+  photoLabelWrapper.mouseOut(() => {
+    photoLabelWrapper.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`); // Original color
+    photoLabelWrapper.style('box-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)'); // Original shadow
+  });
+
+  songlabelWrapper.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`);
+  songlabelWrapper.mouseOut(() => {
+    songlabelWrapper.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`); // Original color
+    songlabelWrapper.style('box-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)'); // Original shadow
+  });
+
+  saveButton.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`);
+  saveButton.mouseOut(() => {
+    saveButton.style('background-color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`); // Original color
+    saveButton.style('box-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)'); // Original shadow
+  });
+
 }
 
 function randomCapitalize(str) {
@@ -666,7 +729,7 @@ function genNext() {
     jumpValue = jumpInput.value() == "" ? 0 : jumpInput.value()
     lengthRay = sizeInput.value() == "" ? 3 : sizeInput.value()
     sendColorToPage(gradient[gradient.length-1].color);
-
+    
   }
   
 }
@@ -677,7 +740,7 @@ function sendColorToPage(col) {
   window.parent.postMessage({ type: 'updateColor', color: colorString }, '*');
 }
 
-function sendGray(col) {
+function sendGray() {
   window.parent.postMessage({ type: 'updateColor', color: 'lightgrey' }, '*');
 }
 
