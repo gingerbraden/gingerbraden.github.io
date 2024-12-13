@@ -174,18 +174,14 @@ function setup() {
   songLabel = createElement('p', 'No song uploaded');
   songLabel.style('font-size', '100px');
   songLabel.style('font-family', 'Arial');
-  songLabel.position(500, 3250);
+  songLabel.position(500, 2525);
 
   songlabelWrapper = createElement('label', 'Upload song');
   songlabelWrapper.attribute('for', 'soundup');
-  styleButtonInput(songlabelWrapper, 500, 2850);
+  styleButtonInput(songlabelWrapper, 500, 2150);
 
   inputSound = createFileInput(handleSound);
   inputSound.position(500, 450);
-  inputSound.style('font-size', '100px'); 
-  inputSound.style('margin-top', '105px');
-  inputSound.style('margin-top', '50px');
-  inputSound.style('color', 'rgba(0,0,0,0)')
   inputSound.id('soundup')
   inputSound.style('display', 'none');
 
@@ -193,28 +189,24 @@ function setup() {
   photoLabel = createElement('p', 'No photo uploaded');
   photoLabel.style('font-size', '100px');
   photoLabel.style('font-family', 'Arial');
-  photoLabel.position(500, 3120);
+  photoLabel.position(500, 2400);
 
   photoLabelWrapper = createElement('label', 'Upload photo');
   photoLabelWrapper.attribute('for', 'photoup');
-  styleButtonInput(photoLabelWrapper, 500, 2500);
+  styleButtonInput(photoLabelWrapper, 500, 1800);
 
   inputPhoto = createFileInput(handleImage);
   inputPhoto.position(500, 700);
-  inputPhoto.style('font-size', '100px'); 
-  inputPhoto.style('margin-top', '105px');
-  inputPhoto.style('margin-top', '50px');
-  inputPhoto.style('color', 'rgba(0,0,0,0)')
   inputPhoto.style('display', 'none');
   inputPhoto.id('photoup')
   setupTextInputs()
   
   saveButton = createButton('Save');
-  styleButtonInput(saveButton, 500, 1450);
+  styleButtonInput(saveButton, 500, 3150);
   saveButton.mousePressed(saveAction);
 
   buttonReset = createButton('Reset generation');
-  styleButtonInput(buttonReset, 500, 1800);
+  styleButtonInput(buttonReset, 500, 1450);
   buttonReset.mousePressed(restartGeneration);
   
 }
