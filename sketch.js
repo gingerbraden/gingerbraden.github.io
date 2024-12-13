@@ -133,7 +133,7 @@ function preload() {
 function setup() {
 
   canvas = createCanvas(2480, 3508);
-  inputPos = windowWidth/2-1250
+  inputPos = 500+1700
   canvas.position(windowWidth/2+350,25)
   // canvas.style('border', '16px solid white');
   canvas.style('border-radius', '10px'); // Optional for rounded corners
