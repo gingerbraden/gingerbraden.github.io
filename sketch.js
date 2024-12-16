@@ -20,17 +20,20 @@ let shapePoints = []
 let shapeDone = false;
 let fftDone = false;
 let count = 0
-let txtStart = 500
-let txtGap = 500
-let txtX = 60
-let inputPos 
+let txtStart = 235
+let txtGap = 225
+let txtX = 20
+
+let firstXpos = 500
+let secondXpos = firstXpos+750 
+let yDelay = 400
 
 let photo; 
 let maskImage; 
 let font; 
 let final
 
-let upperBounds = 1060
+let upperBounds = 450
 let startX;
 let startY;
 let startAngle;
@@ -41,7 +44,7 @@ let timeX;
 let timeY;
 let dateTilt;
 
-let lengthRay =3
+let lengthRay = 1.8
 
 let gradientPos = 0
 let gradient;
@@ -124,6 +127,7 @@ let artistInput, dateInput, timeInput, venueInput, cityInput, durationInput, jum
 let songLabel, photoLabel, jumpValue, sizeValue, sizeInput, headline, photoFileName, soundFileName
 let photoLabelWrapper, songlabelWrapper
 
+
 function preload() {
   font = loadFont('dl.otf');
   sound = loadSound(songFile);
@@ -132,9 +136,8 @@ function preload() {
 
 function setup() {
 
-  canvas = createCanvas(2480, 3508);
-  inputPos = 500+1600
-  canvas.position(windowWidth/2+350,25)
+  canvas = createCanvas(1240, 1748);
+  canvas.position(windowWidth/2+350,25+yDelay)
   // canvas.style('border', '16px solid white');
   canvas.style('border-radius', '10px'); // Optional for rounded corners
   canvas.style('box-shadow', '0 0 1000px rgba(0, 0, 0, 0.3)'); 
@@ -154,113 +157,113 @@ function setup() {
   decidePositions()
 
   button = createButton('Generate');
-  styleButtonInput(button, 500, 1100);
+  styleButtonInput(button, firstXpos, 500+yDelay);
   button.mousePressed(genPos);
 
   nextButton = createButton('Next');
-  styleButtonInput(nextButton, 500, 1100);
+  styleButtonInput(nextButton, firstXpos, 500+yDelay);
   nextButton.mousePressed(genNext);
   nextButton.style('display', 'none');
 
   headline = createElement('h1', 'hArmOnIq')
-  headline.style('font-size', '600px');
+  headline.style('font-size', '200px');
   headline.style('font-family', 'myFirstFont');
   headline.style('color', 'white');
   headline.style('border', '0px solid white')
   headline.style('stroke', 'none')
-  headline.position(500, -350);
+  headline.position(firstXpos, -100+yDelay);
 
   
   songLabel = createElement('p', 'Song: linkin-park.mp3');
-  songLabel.style('font-size', '100px');
+  songLabel.style('font-size', '50px');
   songLabel.style('font-family', 'Arial');
-  songLabel.position(500, 2525);
+  songLabel.position(firstXpos, 1110+yDelay);
 
   songlabelWrapper = createElement('label', 'Upload song');
   songlabelWrapper.attribute('for', 'soundup');
-  styleButtonInput(songlabelWrapper, 500, 2150);
+  styleButtonInput(songlabelWrapper, firstXpos, 950+yDelay);
 
   inputSound = createFileInput(handleSound);
-  inputSound.position(500, 450);
+  inputSound.position(firstXpos, 950+yDelay);
   inputSound.id('soundup')
   inputSound.style('display', 'none');
 
 
   photoLabel = createElement('p', 'Photo: linkin-park.png');
-  photoLabel.style('font-size', '100px');
+  photoLabel.style('font-size', '50px');
   photoLabel.style('font-family', 'Arial');
-  photoLabel.position(500, 2400);
+  photoLabel.position(firstXpos, 1050+yDelay);
 
   photoLabelWrapper = createElement('label', 'Upload photo');
   photoLabelWrapper.attribute('for', 'photoup');
-  styleButtonInput(photoLabelWrapper, 500, 1800);
+  styleButtonInput(photoLabelWrapper, firstXpos, 800+yDelay);
 
   inputPhoto = createFileInput(handleImage);
-  inputPhoto.position(500, 700);
+  inputPhoto.position(firstXpos, 700+yDelay);
   inputPhoto.style('display', 'none');
   inputPhoto.id('photoup')
   setupTextInputs()
   
   saveButton = createButton('Save');
-  styleButtonInput(saveButton, 500, 3150);
+  styleButtonInput(saveButton, firstXpos, 1400+yDelay);
   saveButton.mousePressed(saveAction);
 
   buttonReset = createButton('Reset generation');
-  styleButtonInput(buttonReset, 500, 1450);
+  styleButtonInput(buttonReset, firstXpos, 650+yDelay);
   buttonReset.mousePressed(restartGeneration);
   
 }
 
 function setupTextInputs() {
   artistInput = createInput('Linkin Park');
-  styleTextInput(artistInput, inputPos, 1100, 'Artist name', artistName)
+  styleTextInput(artistInput, secondXpos, 500+yDelay, 'Artist name', artistName)
 
   venueInput = createInput('Melodka');
-  styleTextInput(venueInput, inputPos, 1400, 'Venue name', venue)
+  styleTextInput(venueInput, secondXpos, 650+yDelay, 'Venue name', venue)
 
   dateInput = createInput('12.08.2025');
-  styleTextInput(dateInput, inputPos, 1700, 'Date (DD.MM.YYYY)', date)
+  styleTextInput(dateInput, secondXpos, 800+yDelay, 'Date (DD.MM.YYYY)', date)
 
   timeInput = createInput('22:30');
-  styleTextInput(timeInput, inputPos, 2000, 'Time (HH:MM)', time)
+  styleTextInput(timeInput, secondXpos, 950+yDelay, 'Time (HH:MM)', time)
 
   cityInput = createInput('Brno | Czech Republic');
-  styleTextInput(cityInput, inputPos, 2300, 'City | Country', city)
+  styleTextInput(cityInput, secondXpos, 1100+yDelay, 'City | Country', city)
 
   durationInput = createInput();
-  styleTextInput(durationInput, inputPos, 2600, 'Duration (sec, default=10)', duration)
+  styleTextInput(durationInput, secondXpos, 1250+yDelay, 'Duration (sec, default=10)', duration)
 
   jumpInput = createInput();
-  styleTextInput(jumpInput, inputPos, 2900, 'Jump to (sec, default=0)', jumpValue)
+  styleTextInput(jumpInput, secondXpos, 1400+yDelay, 'Jump to (sec, default=0)', jumpValue)
 
   sizeInput = createInput();
-  styleTextInput(sizeInput, inputPos, 3200, 'Ray length (0-5, default=3)', sizeValue)
+  styleTextInput(sizeInput, secondXpos, 1550+yDelay, 'Ray length (0-3, default=2)', sizeValue)
 }
 
 function styleTextInput(input, xpos, ypos, text, value) {
-  input.size(1250, 150);
+  input.size(1000, 130);
   input.position(xpos, ypos);
-  input.style( 'font-size', '100px');
+  input.style( 'font-size', '75px');
   input.attribute('placeholder', text)
-  input.style('border-radius', '50px');
-  input.style('padding', '50px 50px');
+  input.style('border-radius', '20px');
+  input.style('padding', '0px 40px');
   input.style('border', '0px solid white');
 }
 
 function styleButtonInput(b, xpos, ypos) {
   b.position(xpos, ypos);
   // Style the button
-  b.style('font-size', '175px');
-  b.style('padding', '50px 0px'); // Standard Material button padding
+  b.style('font-size', '75px');
+  b.style('padding', '20px 0px'); // Standard Material button padding
   b.style('background-color', 'grey'); // Material primary color
   b.style('color', '#ffffff'); // Text color
   b.style('font-family', 'Roboto, sans-serif'); // Material font
   b.style('border', 'none'); // No border
-  b.style('border-radius', '50px'); // Rounded corners
+  b.style('border-radius', '20px'); // Rounded corners
   b.style('box-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)'); // Material shadow
   b.style('cursor', 'pointer'); // Pointer cursor for clickable elements
   b.style('transition', 'background-color 0.3s, box-shadow 0.3s'); // Smooth animations\
-  b.style('width', '1550px');
+  b.style('width', '700px');
   b.style('text-align', 'center');
 
   // Hover effect
@@ -319,7 +322,7 @@ function restartGeneration() {
   if (jumpValue != 0) {
     jumpInput.value(jumpValue)
   }
-  if (lengthRay != 3) {
+  if (lengthRay !=1.8) {
     sizeInput.value(lengthRay)
   }
   if (soundFileName != undefined) {
@@ -389,7 +392,7 @@ function imgOnLoad(mimg) {
 
     applyGradientMap();
 
-    // applyGrainEffect(200);
+    applyGrainEffect(100);
     sendColorToPage(gradient[gradient.length-1].color);
     let col = gradient[0].color
     headline.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`);
@@ -503,17 +506,17 @@ function interpolateGradient(value, gradient) {
 }
 
 function decidePositions() {
-  startX = random(500, width-500)
-  startY = random(upperBounds+300, height-300)
+  startX = random(300, width-200)
+  startY = random(upperBounds+50, height-150)
 
-  dateX = random(850, width-850)
-  dateY = random(upperBounds, height-425)
+  dateX = random(200, width-200)
+  dateY = random(upperBounds, height-150)
 
-  timeX = random(850, width-850)
-  timeY = random(upperBounds, height-425)
-  while(createVector(dateX, dateY).dist(createVector(timeX, timeY)) < 350) {
-    timeX = random(850, width-850)
-    timeY = random(upperBounds, height-425)
+  timeX = random(200, width-200)
+  timeY = random(upperBounds, height-150)
+  while(createVector(dateX, dateY).dist(createVector(timeX, timeY)) < 300) {
+    timeX = random(200, width-200)
+    timeY = random(upperBounds, height-150)
   }
 
   dateTilt = random(-30, 30)
@@ -547,7 +550,7 @@ function makeMaskObject() {
       let angle = count * angleStep+startAngle; 
       let x = cos(angle) * (i*step); 
       let y = sin(angle) *  (i*step); 
-      circle(x, y, map(array[i], 0, 255, 0, 25)); 
+      circle(x, y, map(array[i], 0, 255, 0, 10)); 
     }
 
 
@@ -575,11 +578,11 @@ function makeHeadline(textOnRight, headlineBackground) {
     x = width - txtX
   }
   fill(0,0,0)
-  textSize(600)
+  textSize(300)
   let txt = artistName
   let overflow = []
   let tbox = font.textBounds(txt, 50, 250)
-  while (tbox.w+200 > width) {
+  while (tbox.w+75 > width) {
     overflow.push(txt.charAt(txt.length-1))
     txt = txt.slice(0, -1)
     tbox = font.textBounds(txt, 50, 250)
@@ -620,13 +623,13 @@ function drawDate(x, y) {
   push()
   translate(x, y)
   rotate(dateTilt)
-  strokeWeight(15)
+  strokeWeight(8)
   stroke(0,0,0)
-  textSize(200)
+  textSize(100)
   textAlign(CENTER)
   ellipseMode(CENTER)
   fill(255)
-  ellipse(0,0-70, font.textBounds(date, x, y).w+275, 375)
+  ellipse(0,0-33, font.textBounds(date, x, y).w+200, 175)
   fill(0)
   noStroke()
   text(date, 0,0)
@@ -638,12 +641,12 @@ function drawTime(x, y) {
   stroke(0,0,0)
   translate(x, y)
   rotate(-dateTilt)
-  strokeWeight(15)
-  textSize(200)
+  strokeWeight(8)
+  textSize(100)
   textAlign(CENTER)
   ellipseMode(CENTER)
   fill(255)
-  ellipse(0,0-70, font.textBounds(time, x, y).w+275, 375)
+  ellipse(0,0-33, font.textBounds(time, x, y).w+200, 175)
   fill(0)
   noStroke()
   text(time, 0,0)
@@ -659,8 +662,8 @@ function drawLocation(inverse) {
     fill(0,0,0)
   }
   rectMode(CORNER)
-  rect(0, height-225, width, 225)
-  textSize(100)
+  rect(0, height-110, width, 110)
+  textSize(50)
   rectMode(CENTER)
   textAlign(CENTER)
   if (inverse) {
@@ -668,9 +671,9 @@ function drawLocation(inverse) {
   } else {
     fill(0,0,100)
   }
-  text(venue, width/2, height-100)
-  textSize(50)
-  text(city, width/2, height-40)
+  text(venue, width/2, height-50)
+  textSize(20)
+  text(city, width/2, height-20)
   pop()
 }
 
@@ -685,7 +688,7 @@ function genPos() {
 
   duration = durationInput.value() == "" ? 600 : int(durationInput.value())*60
   jumpValue = jumpInput.value() == "" ? 0 : jumpInput.value()
-  lengthRay = sizeInput.value() == "" ? 3 : sizeInput.value()
+  lengthRay = sizeInput.value() == "" ? 1.8 : sizeInput.value()
 
   button.style('display', 'none');
   nextButton.style('display', 'none');
@@ -719,7 +722,7 @@ function genNext() {
     time = timeInput.value()  
     duration = durationInput.value() == "" ? 600 : int(durationInput.value())*60
     jumpValue = jumpInput.value() == "" ? 0 : jumpInput.value()
-    lengthRay = sizeInput.value() == "" ? 3 : sizeInput.value()
+    lengthRay = sizeInput.value() == "" ? 1.8 : sizeInput.value()
     sendColorToPage(gradient[gradient.length-1].color);
     
   }
