@@ -389,7 +389,7 @@ function imgOnLoad(mimg) {
 
     applyGradientMap();
 
-    applyGrainEffect(200);
+    // applyGrainEffect(200);
     sendColorToPage(gradient[gradient.length-1].color);
     let col = gradient[0].color
     headline.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`);
