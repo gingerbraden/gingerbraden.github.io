@@ -133,7 +133,7 @@ function preload() {
 function setup() {
 
   canvas = createCanvas(2480, 3508);
-  inputPos = 500+1700
+  inputPos = 500+1600
   canvas.position(windowWidth/2+350,25)
   // canvas.style('border', '16px solid white');
   canvas.style('border-radius', '10px'); // Optional for rounded corners
@@ -728,7 +728,6 @@ function genNext() {
 
 function sendColorToPage(col) {
   const colorString = `rgb(${col[0]}, ${col[1]}, ${col[2]})`;
-  // Dispatch the color to the main document
   window.parent.postMessage({ type: 'updateColor', color: colorString }, '*');
 }
 
@@ -744,5 +743,5 @@ function increaseGradientPos() {
 }
 
 function saveAction() {
-    save("mySketch.png");
+    save(artistName.toLowerCase() + "_" + venue.toLowerCase() + "_" + date + "_poster.png");
 }
