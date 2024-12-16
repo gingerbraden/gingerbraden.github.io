@@ -1,12 +1,12 @@
 // ===========================  USER INPUTS  =========================== //
 
-let artistName = "linkin park"
+let artistName = "glass beams"
 let date = "12.08.2025"
 let time = "20:30"
 let venue = "fuchs2"
 let city = "prague | czech republic"
-let songFile = "lp.mp3"
-let artistImageFile = "lp.jpg"
+let songFile = "gb.mp3"
+let artistImageFile = "gb.jpg"
 let duration
 
 // ===================================================================== //
@@ -174,7 +174,7 @@ function setup() {
   headline.position(firstXpos, -100+yDelay);
 
   
-  songLabel = createElement('p', 'Song: linkin-park.mp3');
+  songLabel = createElement('p', 'Song: glass-beams.mp3');
   songLabel.style('font-size', '50px');
   songLabel.style('font-family', 'Arial');
   songLabel.position(firstXpos, 1110+yDelay);
@@ -189,7 +189,7 @@ function setup() {
   inputSound.style('display', 'none');
 
 
-  photoLabel = createElement('p', 'Photo: linkin-park.png');
+  photoLabel = createElement('p', 'Photo: glass-beams.png');
   photoLabel.style('font-size', '50px');
   photoLabel.style('font-family', 'Arial');
   photoLabel.position(firstXpos, 1050+yDelay);
@@ -215,7 +215,7 @@ function setup() {
 }
 
 function setupTextInputs() {
-  artistInput = createInput('Linkin Park');
+  artistInput = createInput('glass beams');
   styleTextInput(artistInput, secondXpos, 500+yDelay, 'Artist name', artistName)
 
   venueInput = createInput('Melodka');
