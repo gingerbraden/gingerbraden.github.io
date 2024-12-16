@@ -171,7 +171,7 @@ function setup() {
   headline.position(500, -350);
 
   
-  songLabel = createElement('p', 'No song uploaded');
+  songLabel = createElement('p', 'Song: linkin-park.mp3');
   songLabel.style('font-size', '100px');
   songLabel.style('font-family', 'Arial');
   songLabel.position(500, 2525);
@@ -186,7 +186,7 @@ function setup() {
   inputSound.style('display', 'none');
 
 
-  photoLabel = createElement('p', 'No photo uploaded');
+  photoLabel = createElement('p', 'Photo: linkin-park.png');
   photoLabel.style('font-size', '100px');
   photoLabel.style('font-family', 'Arial');
   photoLabel.position(500, 2400);
@@ -212,19 +212,19 @@ function setup() {
 }
 
 function setupTextInputs() {
-  artistInput = createInput();
+  artistInput = createInput('Linkin Park');
   styleTextInput(artistInput, inputPos, 1100, 'Artist name', artistName)
 
-  venueInput = createInput();
+  venueInput = createInput('Melodka');
   styleTextInput(venueInput, inputPos, 1400, 'Venue name', venue)
 
-  dateInput = createInput();
+  dateInput = createInput('12.08.2025');
   styleTextInput(dateInput, inputPos, 1700, 'Date (DD.MM.YYYY)', date)
 
-  timeInput = createInput();
+  timeInput = createInput('22:30');
   styleTextInput(timeInput, inputPos, 2000, 'Time (HH:MM)', time)
 
-  cityInput = createInput();
+  cityInput = createInput('Brno | Czech Republic');
   styleTextInput(cityInput, inputPos, 2300, 'City | Country', city)
 
   durationInput = createInput();
