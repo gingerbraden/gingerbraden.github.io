@@ -24,9 +24,9 @@ let txtStart = 235
 let txtGap = 225
 let txtX = 20
 
-let firstXpos = 500
+let firstXpos = 400
 let secondXpos = firstXpos+750 
-let yDelay = 400
+let yDelay = 200
 
 let photo; 
 let maskImage; 
@@ -119,6 +119,10 @@ let gradients = [
     { stop: 0, color: [82,44,44] },  
     { stop: 0.29, color: [66,126,98] }, 
     { stop: 1, color: [250,185,45] }, 
+  ],
+  [
+    { stop: 0, color: [151,72,129] },  
+    { stop: 1, color: [207,250,181] }, 
   ],
 ]
 
