@@ -245,7 +245,7 @@ function setupTextInputs() {
 }
 
 function styleTextInput(input, xpos, ypos, text, value) {
-  input.size(1000, 130);
+  input.size(900, 130);
   input.position(xpos, ypos);
   input.style( 'font-size', '75px');
   input.attribute('placeholder', text)
