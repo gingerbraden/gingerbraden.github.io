@@ -705,12 +705,9 @@ function genPos() {
   button.style('display', 'none');
   nextButton.style('display', 'none');
   
-  if (!fftDone) {
-     photoLabel.style('color', 'lightgrey')
-  } else {
+
      let col = gradient[0].color
      photoLabel.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`)
-  }
 
   if (!fftDone) {
     if (sound.isPlaying()) {
