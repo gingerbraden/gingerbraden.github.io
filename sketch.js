@@ -307,7 +307,7 @@ function restartGeneration() {
   startAngle = random(360)
   fftDone = false;
   count = 0;  
-  photoLabel.style('color', 'black)
+  photoLabel.style('color', 'black')
   songLabel.style('color', 'lightgrey')
   loop();
   setup()
