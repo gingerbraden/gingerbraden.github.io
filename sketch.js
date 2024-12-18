@@ -200,8 +200,8 @@ function setup() {
  // photoLabel.position(firstXpos, 1050+yDelay);
 
   photoLabel = createInput('Photo: glass-beams.mp3')
-  photoLabel.position(firstXpos, 1050+yDelay)
-  photoLabel.style( 'font-size', '75px');
+  photoLabel.position(firstXpos, 1100+yDelay)
+  photoLabel.style( 'font-size', '50px');
   photoLabel.attribute('placeholder', text)
   photoLabel.style('border-radius', '20px');
   photoLabel.style('padding', '0px 40px');
@@ -316,12 +316,12 @@ function restartGeneration() {
   startAngle = random(360)
   fftDone = false;
   count = 0;  
-  if (!fftDone) {
-     photoLabel.style('color', 'lightgrey')
-  } else {
-     let col = gradient[0].color
-     photoLabel.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`)
-  }
+  // if (!fftDone) {
+  //    photoLabel.style('color', 'lightgrey')
+  // } else {
+  //    let col = gradient[0].color
+  //    photoLabel.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`)
+  // }
   
   songLabel.style('color', 'lightgrey')
   loop();
