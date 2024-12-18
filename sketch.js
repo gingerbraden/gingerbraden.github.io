@@ -191,7 +191,7 @@ function setup() {
   songLabel.style('padding', '0px 40px');
   songLabel.style('border', '0px solid white');
   songLabel.attribute('readonly', true)
-  songLabel.size(625, 130); 
+  songLabel.size(620, 130); 
 
   songlabelWrapper = createElement('label', 'Upload song');
   songlabelWrapper.attribute('for', 'soundup');
@@ -214,7 +214,7 @@ function setup() {
   photoLabel.style('border-radius', '20px');
   photoLabel.style('padding', '0px 40px');
   photoLabel.style('border', '0px solid white');
-  photoLabel.size(625, 130); 
+  photoLabel.size(620, 130); 
   photoLabel.attribute('readonly', true)
   
   
