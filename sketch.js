@@ -194,11 +194,19 @@ function setup() {
   inputSound.style('display', 'none');
 
 
-  photoLabel = createElement('p', 'Photo: glass-beams.png');
-  photoLabel.style('font-size', '50px');
-  photoLabel.style('font-family', 'Arial');
-  photoLabel.position(firstXpos, 1050+yDelay);
+ // photoLabel = createElement('p', 'Photo: glass-beams.png');
+ // photoLabel.style('font-size', '50px');
+//  photoLabel.style('font-family', 'Arial');
+ // photoLabel.position(firstXpos, 1050+yDelay);
 
+  photoLabel = createInput('Photo: glass-beams.mp3')
+  photoLabel.style( 'font-size', '75px');
+  photoLabel.attribute('placeholder', text)
+  photoLabel.style('border-radius', '20px');
+  photoLabel.style('padding', '0px 40px');
+  photoLabel.style('border', '0px solid white');
+  photoLabel.size(700, 130)
+  
   photoLabelWrapper = createElement('label', 'Upload photo');
   photoLabelWrapper.attribute('for', 'photoup');
   styleButtonInput(photoLabelWrapper, firstXpos, 800+yDelay);
@@ -368,7 +376,8 @@ function handleImage(file) {
     photo = loadImage(file.data, '');
     let a = "Photo: " + photoFileName
     if (a.length > 25) a = a.substring(0, 25) + "...";
-    photoLabel.html(a);
+//    photoLabel.html(a);
+    photoLabel.value = a
     
   } 
 }
@@ -740,12 +749,12 @@ function genNext() {
     jumpValue = jumpInput.value() == "" ? 0 : jumpInput.value()
     lengthRay = sizeInput.value() == "" ? 1.8 : sizeInput.value()
     sendColorToPage(gradient[gradient.length-1].color);
-    if (!fftDone) {
-     photoLabel.style('color', 'lightgrey')
-  } else {
-     let col = gradient[0].color
-     photoLabel.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`)
-    }
+  //  if (!fftDone) {
+//     photoLabel.style('color', 'lightgrey')
+//  } else {
+//     let col = gradient[0].color
+//     photoLabel.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`)
+//    }
   }
   
 }
