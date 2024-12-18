@@ -179,10 +179,19 @@ function setup() {
   headline.position(firstXpos, -100+yDelay);
 
   
-  songLabel = createElement('p', 'Song: glass-beams.mp3');
-  songLabel.style('font-size', '50px');
-  songLabel.style('font-family', 'Arial');
-  songLabel.position(firstXpos, 1110+yDelay);
+  // songLabel = createElement('p', 'Song: glass-beams.mp3');
+  // songLabel.style('font-size', '50px');
+  // songLabel.style('font-family', 'Arial');
+  // songLabel.position(firstXpos, 1110+yDelay);
+
+  songLabel = createInput('Song: glass-beams.mp3')
+  songLabel.position(firstXpos, 1250+yDelay)
+  songLabel.style( 'font-size', '50px');
+  songLabel.attribute('placeholder', text)
+  songLabel.style('border-radius', '20px');
+  songLabel.style('padding', '0px 40px');
+  songLabel.style('border', '0px solid white');
+  songLabel.style('width', '700px')
 
   songlabelWrapper = createElement('label', 'Upload song');
   songlabelWrapper.attribute('for', 'soundup');
@@ -206,7 +215,7 @@ function setup() {
   photoLabel.style('border-radius', '20px');
   photoLabel.style('padding', '0px 40px');
   photoLabel.style('border', '0px solid white');
-  photoLabel.size(700, 130)
+  photoLabel.style('width', '700px')
   
   photoLabelWrapper = createElement('label', 'Upload photo');
   photoLabelWrapper.attribute('for', 'photoup');
@@ -348,12 +357,12 @@ function restartGeneration() {
   if (soundFileName != undefined) {
     let a = "Song: " + soundFileName
     if (a.length > 25) a = a.substring(0, 25) + "...";
-    songLabel.html(a);
+    songLabel.value(a)
   }
   if (photoFileName != undefined) { 
     let a = "Photo: " + photoFileName
     if (a.length > 25) a = a.substring(0, 25) + "...";
-    photoLabel.html(a);
+    photoLabel.value(a)
   } 
   
   
@@ -366,7 +375,7 @@ function handleSound(file) {
     sound = loadSound(file.data, '');
     let a = "Song: " + soundFileName
     if (a.length > 25) a = a.substring(0, 25) + "...";
-    songLabel.html(a);
+    songLabel.value(a)
     
   } 
 }
@@ -714,10 +723,6 @@ function genPos() {
 
   button.style('display', 'none');
   nextButton.style('display', 'none');
-  
-
-     let col = gradient[0].color
-     photoLabel.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`)
 
   if (!fftDone) {
     if (sound.isPlaying()) {
