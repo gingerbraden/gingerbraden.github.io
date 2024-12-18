@@ -130,6 +130,7 @@ let button, nextButton, inputSound, inputPhoto, buttonReset, saveButton
 let artistInput, dateInput, timeInput, venueInput, cityInput, durationInput, jumpInput
 let songLabel, photoLabel, jumpValue, sizeValue, sizeInput, headline, photoFileName, soundFileName
 let photoLabelWrapper, songlabelWrapper
+let resetPos=true
 
 
 function preload() {
@@ -510,9 +511,10 @@ function interpolateGradient(value, gradient) {
 }
 
 function decidePositions() {
-  startX = random(300, width-200)
-  startY = random(upperBounds+50, height-150)
-
+  if(resetPos) {
+    startX = random(300, width-200)
+    startY = random(upperBounds+50, height-150)
+  }
   dateX = random(200, width-200)
   dateY = random(upperBounds, height-150)
 
@@ -751,4 +753,14 @@ function increaseGradientPos() {
 
 function saveAction() {
     save(artistName.toLowerCase() + "_" + venue.toLowerCase() + "_" + date + "_poster.png");
+}
+
+function mouseClicked(event) {
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+  resetPos = false
+  restartGeneration()
+  startX = mouseX
+  startY = mouseY
+  resetPos = true
+  }
 }
