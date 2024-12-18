@@ -200,6 +200,7 @@ function setup() {
  // photoLabel.position(firstXpos, 1050+yDelay);
 
   photoLabel = createInput('Photo: glass-beams.mp3')
+  photoLabel.position(firstXpos, 1050+yDelay)
   photoLabel.style( 'font-size', '75px');
   photoLabel.attribute('placeholder', text)
   photoLabel.style('border-radius', '20px');
@@ -377,7 +378,7 @@ function handleImage(file) {
     let a = "Photo: " + photoFileName
     if (a.length > 25) a = a.substring(0, 25) + "...";
 //    photoLabel.html(a);
-    photoLabel.value = a
+    photoLabel.value(a)
     
   } 
 }
