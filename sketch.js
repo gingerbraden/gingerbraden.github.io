@@ -307,7 +307,13 @@ function restartGeneration() {
   startAngle = random(360)
   fftDone = false;
   count = 0;  
-  photoLabel.style('color', 'black')
+  if (!fftDone) {
+     photoLabel.style('color', 'lightgrey')
+  } else {
+     let col = gradient[0].color
+     photoLabel.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`)
+  }
+  
   songLabel.style('color', 'lightgrey')
   loop();
   setup()
