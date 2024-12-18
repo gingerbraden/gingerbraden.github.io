@@ -201,6 +201,7 @@ function setup() {
   inputSound.position(firstXpos, 950+yDelay);
   inputSound.id('soundup')
   inputSound.style('display', 'none');
+  inputSound.attribute('accept', '.mp3')
 
 
  // photoLabel = createElement('p', 'Photo: glass-beams.png');
@@ -227,6 +228,7 @@ function setup() {
   inputPhoto.position(firstXpos, 700+yDelay);
   inputPhoto.style('display', 'none');
   inputPhoto.id('photoup')
+  inputPhoto.attribute('accept', '.jpg')
   setupTextInputs()
   
   saveButton = createButton('Save');
