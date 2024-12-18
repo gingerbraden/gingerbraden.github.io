@@ -187,11 +187,11 @@ function setup() {
   songLabel = createInput('Song: glass-beams.mp3')
   songLabel.position(firstXpos, 1250+yDelay)
   songLabel.style( 'font-size', '50px');
-  songLabel.attribute('placeholder', text)
   songLabel.style('border-radius', '20px');
   songLabel.style('padding', '0px 40px');
   songLabel.style('border', '0px solid white');
-  songLabel.style('width', '700px')
+  songLabel.attribute('readonly')
+  songLabel.size(700, 130); 
 
   songlabelWrapper = createElement('label', 'Upload song');
   songlabelWrapper.attribute('for', 'soundup');
@@ -211,11 +211,12 @@ function setup() {
   photoLabel = createInput('Photo: glass-beams.mp3')
   photoLabel.position(firstXpos, 1100+yDelay)
   photoLabel.style( 'font-size', '50px');
-  photoLabel.attribute('placeholder', text)
   photoLabel.style('border-radius', '20px');
   photoLabel.style('padding', '0px 40px');
   photoLabel.style('border', '0px solid white');
-  photoLabel.style('width', '700px')
+  photoLabel.size(700, 130); 
+  
+  
   
   photoLabelWrapper = createElement('label', 'Upload photo');
   photoLabelWrapper.attribute('for', 'photoup');
