@@ -704,6 +704,13 @@ function genPos() {
 
   button.style('display', 'none');
   nextButton.style('display', 'none');
+  
+  if (!fftDone) {
+     photoLabel.style('color', 'lightgrey')
+  } else {
+     let col = gradient[0].color
+     photoLabel.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`)
+  }
 
   if (!fftDone) {
     if (sound.isPlaying()) {
@@ -736,7 +743,12 @@ function genNext() {
     jumpValue = jumpInput.value() == "" ? 0 : jumpInput.value()
     lengthRay = sizeInput.value() == "" ? 1.8 : sizeInput.value()
     sendColorToPage(gradient[gradient.length-1].color);
-    
+    if (!fftDone) {
+     photoLabel.style('color', 'lightgrey')
+  } else {
+     let col = gradient[0].color
+     photoLabel.style('color', `rgb(${col[0]}, ${col[1]}, ${col[2]})`)
+    }
   }
   
 }
