@@ -79,7 +79,7 @@
 <div class="screen">
 
     <div class="top-bar">
-        <div class="title" id="pageTitle">Odstránenie účtu</div>
+        <div class="title" id="pageTitle">AutToolkit</div>
         <select onchange="changeLanguage(this.value)">
             <option value="sk">SK</option>
             <option value="cz">CZ</option>
@@ -108,42 +108,53 @@
         </p>
     </div>
 
+    <div class="card">
+        <h2 id="privacyTitle">Pravidlá ochrany súkromia</h2>
+        <p id="privacyText">
+            Údaje sú ukladané lokálne vo vašom zariadení a v cloudovej infraštruktúre Firebase (Firebase Storage a Firebase Firestore).
+            Údaje nie sú zdieľané so žiadnymi tretími stranami a používajú sa výlučne na synchronizáciu vášho používateľského zážitku medzi viacerými zariadeniami.
+        </p>
+    </div>
+
 </div>
 
 <script>
 const translations = {
     en: {
-        pageTitle: "Account Deletion",
-        appRefTitle: "Application Reference",
-        appRefText: "Developer: Jakub Krištof",
-        processTitle: "How to Request Account Deletion",
-        processStep: "Open the app, navigate to Settings and press the red button to delete your account.",
-        dataTitle: "Data Removal Information",
-        dataText: "Nothing will be kept. Everything will be permanently deleted, including all data you saved, your account, and your password."
-    },
-    sk: {
-    pageTitle: "Odstránenie účtu",
+    appRefTitle: "Application Reference",
+    appRefText: "Developer: Jakub Krištof",
+    processTitle: "How to Request Account Deletion",
+    processStep: "Open the app, navigate to Settings and press the red button to delete your account.",
+    dataTitle: "Data Removal Information",
+    dataText: "Nothing will be kept. Everything will be permanently deleted, including all data you saved, your account, and your password.",
+    privacyTitle: "Privacy Policy",
+    privacyText: "User data is stored locally on your device and securely in cloud infrastructure provided by Firebase (Firebase Storage and Firebase Firestore). The data is not shared with any third parties. It is used solely to synchronize your experience across multiple devices."
+},
+
+sk: {
     appRefTitle: "Informácie o aplikácii",
     appRefText: "Vývojár: Jakub Krištof",
     processTitle: "Ako požiadať o odstránenie účtu",
     processStep: "Otvorte aplikáciu, prejdite do Nastavení a stlačte červené tlačidlo na odstránenie účtu.",
     dataTitle: "Informácie o odstránení údajov",
-    dataText: "Nič nebude zachované. Všetko bude trvalo odstránené vrátane všetkých uložených údajov, vášho účtu a hesla."
+    dataText: "Nič nebude zachované. Všetko bude trvalo odstránené vrátane všetkých uložených údajov, vášho účtu a hesla.",
+    privacyTitle: "Pravidlá ochrany súkromia",
+    privacyText: "Údaje používateľa sú ukladané lokálne vo vašom zariadení a bezpečne v cloudovej infraštruktúre Firebase (Firebase Storage a Firebase Firestore). Údaje nie sú zdieľané so žiadnymi tretími stranami. Používajú sa výlučne na synchronizáciu vášho používateľského zážitku medzi viacerými zariadeniami."
 },
 
 cz: {
-    pageTitle: "Smazání účtu",
     appRefTitle: "Informace o aplikaci",
     appRefText: "Vývojář: Jakub Krištof",
     processTitle: "Jak požádat o smazání účtu",
     processStep: "Otevřete aplikaci, přejděte do Nastavení a stiskněte červené tlačítko pro smazání účtu.",
     dataTitle: "Informace o odstranění údajů",
-    dataText: "Nic nebude zachované. Vše bude trvale odstraněno včetně všech uložených dat, vašeho účtu a hesla."
+    dataText: "Nic nebude zachováno. Vše bude trvale odstraněno včetně všech uložených dat, vašeho účtu a hesla.",
+    privacyTitle: "Zásady ochrany soukromí",
+    privacyText: "Uživatelská data jsou ukládána lokálně ve vašem zařízení a bezpečně v cloudové infrastruktuře Firebase (Firebase Storage a Firebase Firestore). Data nejsou sdílena s žádnými třetími stranami. Používají se výhradně k synchronizaci vašeho uživatelského prostředí mezi více zařízeními."
 }
 };
 
 function changeLanguage(lang) {
-    document.getElementById("pageTitle").innerText = translations[lang].pageTitle;
     document.getElementById("appRefTitle").innerText = translations[lang].appRefTitle;
     document.getElementById("appRefText").innerText = translations[lang].appRefText;
     document.getElementById("processTitle").innerText = translations[lang].processTitle;
